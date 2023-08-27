@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Creator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSilpsvWoayKdSlvd8JSnx8gfVvLjCL5WKS2g&usqp=CAU);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        header {
+            width: 100%;
+            height: 10vh;
+            background: linear-gradient(rgba(0,0,0,0) 80%, #e67e22);
+            background-size: 100%;
+            background-color: transparent;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        #content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            gap: 2rem;
+           
+        }
+        .blog-element {
+            width: 100%;
+            max-width: 800px;
+            padding: 1rem;
+            border: 2px solid #ccc;
+            border-style: solid;
+            border-color: orange;
+            border-radius: 4px;
+            
+        }
+        .blog-element h2 {
+            margin: 0;
+           
+        }
+        .blog-element input[type="text"], .blog-element textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: transparent;
+        }
+        .blog-element img {
+            max-width: 70%;
+            height: 70%;
+            display: block;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Blog Creator</h1>
+    </header>
+    <div id="content">
+        <div class="blog-element">
+            <h2>Title</h2>
+            <input type="text" id="title" placeholder="Enter title">
+        </div>
+        <div class="blog-element">
+            <h2>Text</h2>
+            <textarea id="text" placeholder="Enter text"></textarea>
+        </div>
+        <div class="blog-element">
+            <h2>Image</h2>
+            <input type="file" id="image">
+        </div>
+        <div class="blog-element">
+            <button onclick="createBlog()">Create Blog</button>
+        </div>
+    </div>
+
+    <script>
+        function createBlog() {
+            const title = document.getElementById('title').value;
+            const text = document.getElementById('text').value;
+            const imageInput = document.getElementById('image');
+
+            const blogPost = document.createElement('div');
+            blogPost.classList.add('blog-element');
+            blogPost.innerHTML = `
+                <h2>${title}</h2>
+                <p>${text}</p>
+                <img src="" alt="Blog Image">
+            `;
+
+            const content = document.getElementById('content');
+            content.appendChild(blogPost);
+
+            if (imageInput.files && imageInput.files[0]) {
+                const image = imageInput.files[0];
+                const imageUrl = URL.createObjectURL(image);
+                const imgElement = blogPost.querySelector('img');
+                imgElement.src = imageUrl;
+            }
+        }
+    </script>
+</body>
+</html>
